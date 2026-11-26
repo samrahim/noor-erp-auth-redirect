@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Opening Noor ERP...</title>
+  </head>
+  <body>
+    <p id="status">Opening Noor ERP desktop app...</p>
+    <a id="manual-link" href="#" style="display: none"
+      >Click here if the app did not open</a
+    >
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const oobCode = params.get("oobCode");
+
+      if (oobCode) {
+        const deepLink = `noor-erp://reset-password?oobCode=${encodeURIComponent(
+          oobCode
+        )}`;
+        const link = document.getElementById("manual-link");
+        link.href = deepLink;
+        link.style.display = "inline-block";
+
+        window.location.href = deepLink;
+      } else {
+        document.getElementById("status").textContent =
+          "Invalid or missing reset code.";
+      }
+    </script>
+  </body>
+</html>
